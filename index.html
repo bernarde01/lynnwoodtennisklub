@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lynnwood Tennisklub – Your local tennis club. Courts, coaching, and a friendly community for all levels.">
+  <title>Lynnwood Tennisklub</title>
+  <link rel="icon" type="image/png" href="Logo.png">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <nav class="nav">
+      <div class="container">
+        <div class="nav-content">
+          <a href="#" class="logo-link" aria-label="Lynnwood Tennisklub home">
+            <img src="Logo.png" alt="Lynnwood Tennisklub" class="logo">
+          </a>
+          <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <ul class="nav-links" id="navLinks">
+            <li><a href="#about">About</a></li>
+            <li><a href="#facilities">Facilities</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <h1 class="hero-title">Lynnwood Tennisklub</h1>
+          <p class="hero-subtitle">Welcome to Lynnwood Tennisklub. Courts, coaching, and a friendly community for players of all levels.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section section--alt">
+      <div class="container">
+        <h2 class="section-title">About the club</h2>
+        <div class="about-content">
+          <p class="lead">
+            Lynnwood Tennisklub is a welcoming club for players of all levels. We offer courts, coaching, and a friendly community for everyone who loves the game.
+          </p>
+          <p>
+            Whether you’re new to tennis or an experienced player, you’ll find a place here. Get in touch to find out about membership, court bookings, and social play.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="facilities" class="section">
+      <div class="container">
+        <h2 class="section-title">Our facilities</h2>
+        <p class="section-intro">
+          We have quality courts and facilities for members and visitors. More photos of our courts and clubhouse will be added here soon.
+        </p>
+        <div class="facilities-grid">
+          <div class="facility-card facility-card--placeholder">
+            <span class="facility-placeholder-text">Photo coming soon</span>
+          </div>
+          <div class="facility-card facility-card--placeholder">
+            <span class="facility-placeholder-text">Photo coming soon</span>
+          </div>
+          <div class="facility-card facility-card--placeholder">
+            <span class="facility-placeholder-text">Photo coming soon</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section section--alt">
+      <div class="container">
+        <h2 class="section-title">Contact us</h2>
+        <p class="section-intro">
+          Get in touch for membership, court bookings, or any questions.
+        </p>
+        <div class="contact-card">
+          <div class="contact-details">
+            <div class="contact-item">
+              <span class="contact-label">Email</span>
+              <a href="#" class="contact-email" data-user="lynnwoodtennisklub" data-domain="gmail.com">Loading…</a>
+            </div>
+            <div class="contact-item">
+              <span class="contact-label">Address</span>
+              <address>
+                Lynnwood Tennisklub<br>
+                Rosemary Street<br>
+                Lynnwood, Pretoria
+              </address>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <img src="Logo.png" alt="Lynnwood Tennisklub" class="footer-logo">
+      <p>&copy; Lynnwood Tennisklub. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (href === '#') return;
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    // Mobile menu toggle
+    var menuToggle = document.getElementById('menuToggle');
+    var navLinks = document.getElementById('navLinks');
+    if (menuToggle && navLinks) {
+      menuToggle.addEventListener('click', function () {
+        menuToggle.classList.toggle('active');
+        navLinks.classList.toggle('active');
+      });
+      navLinks.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () {
+          menuToggle.classList.remove('active');
+          navLinks.classList.remove('active');
+        });
+      });
+    }
+
+    // Email obfuscation: build mailto from data attributes so scrapers don’t see the full address
+    (function () {
+      var el = document.querySelector('.contact-email');
+      if (!el) return;
+      var user = el.getAttribute('data-user');
+      var domain = el.getAttribute('data-domain');
+      if (user && domain) {
+        var addr = user + '\u0040' + domain;
+        el.href = 'mailto:' + addr;
+        el.textContent = addr;
+      }
+    })();
+  </script>
+</body>
+</html>
