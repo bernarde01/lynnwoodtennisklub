@@ -242,6 +242,25 @@ section {
   margin: 0 auto;
 }
 
+/* Last card centered and same size as one grid column (gap is 1.5rem) */
+.facilities-grid .facility-card:last-child {
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: calc((100% - 3rem) / 3);  /* matches one column when grid has 3 columns */
+}
+
+@media (max-width: 900px) {
+  .facilities-grid .facility-card:last-child {
+    width: calc((100% - 1.5rem) / 2);  /* 2 columns */
+  }
+}
+
+@media (max-width: 600px) {
+  .facilities-grid .facility-card:last-child {
+    width: 100%;  /* 1 column */
+  }
+}
+
 .facility-card {
   aspect-ratio: 4 / 3;
   background: var(--bg-white);
