@@ -64,6 +64,22 @@
         <p class="section-intro">
           Our courts and club facilities for members and visitors.
         </p>
+
+        <h3 class="facilities-subtitle">Videos</h3>
+        <div class="facilities-videos">
+          <div class="video-showcase">
+            <video controls playsinline preload="metadata" aria-label="Club facilities video">
+              <source src="Images/WhatsApp%20Video%202026-03-08%20at%2020.39.30.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="video-showcase">
+            <video controls playsinline preload="metadata" aria-label="Club facilities video">
+              <source src="Images/WhatsApp%20Video%202026-03-08%20at%2020.39.37.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+
+        <h3 class="facilities-subtitle">Photos</h3>
         <div class="facilities-grid">
           <div class="facility-card">
             <img src="Images/WhatsApp%20Image%202026-03-03%20at%2007.56.51.jpeg" alt="Lynnwood Tennisklub facilities">
@@ -85,6 +101,33 @@
           </div>
           <div class="facility-card">
             <img src="Images/WhatsApp%20Image%202026-03-03%20at%2008.03.23.jpeg" alt="Lynnwood Tennisklub facilities">
+          </div>
+          <div class="facility-card">
+            <img src="Images/WhatsApp%20Image%202026-03-28%20at%2011.52.28.jpeg" alt="Lynnwood Tennisklub facilities">
+          </div>
+          <div class="facility-card">
+            <img src="Images/WhatsApp%20Image%202026-03-28%20at%2011.52.29%20(1).jpeg" alt="Lynnwood Tennisklub facilities">
+          </div>
+          <div class="facility-card">
+            <img src="Images/WhatsApp%20Image%202026-03-28%20at%2011.52.29%20(2).jpeg" alt="Lynnwood Tennisklub facilities">
+          </div>
+          <div class="facility-card">
+            <img src="Images/WhatsApp%20Image%202026-03-28%20at%2011.52.29.jpeg" alt="Lynnwood Tennisklub facilities">
+          </div>
+          <div class="facility-card">
+            <img src="Images/WhatsApp%20Image%202026-03-28%20at%2011.52.30%20(1).jpeg" alt="Lynnwood Tennisklub facilities">
+          </div>
+          <div class="facility-card">
+            <img src="Images/WhatsApp%20Image%202026-03-28%20at%2011.52.30.jpeg" alt="Lynnwood Tennisklub facilities">
+          </div>
+          <div class="facility-card">
+            <img src="Images/WhatsApp%20Image%202026-03-28%20at%2011.52.31%20(1).jpeg" alt="Lynnwood Tennisklub facilities">
+          </div>
+          <div class="facility-card">
+            <img src="Images/WhatsApp%20Image%202026-03-28%20at%2011.52.31%202.jpeg" alt="Lynnwood Tennisklub facilities">
+          </div>
+          <div class="facility-card">
+            <img src="Images/WhatsApp%20Image%202026-03-28%20at%2011.52.31.jpeg" alt="Lynnwood Tennisklub facilities">
           </div>
         </div>
       </div>
@@ -162,6 +205,41 @@
         el.href = 'mailto:' + addr;
         el.textContent = addr;
       }
+    })();
+
+    // Center last facility card only when it is alone on the last row (works for any column count)
+    (function () {
+      var grid = document.querySelector('.facilities-grid');
+      if (!grid) return;
+      var cards = grid.querySelectorAll('.facility-card');
+      function updateOrphan() {
+        cards.forEach(function (c) {
+          c.classList.remove('facility-card--orphan');
+          c.style.width = '';
+        });
+        if (cards.length < 2) return;
+        var firstTop = cards[0].getBoundingClientRect().top;
+        var cols = 0;
+        for (var i = 0; i < cards.length; i++) {
+          if (Math.abs(cards[i].getBoundingClientRect().top - firstTop) < 8) cols++;
+          else break;
+        }
+        if (cols < 1) cols = 1;
+        if (cards.length % cols === 1) {
+          var last = cards[cards.length - 1];
+          last.classList.add('facility-card--orphan');
+          var gapRem = (cols - 1) * 1.5;
+          last.style.width = 'calc((100% - ' + gapRem + 'rem) / ' + cols + ')';
+        } else {
+          cards[cards.length - 1].style.width = '';
+        }
+      }
+      updateOrphan();
+      var t;
+      window.addEventListener('resize', function () {
+        clearTimeout(t);
+        t = setTimeout(updateOrphan, 150);
+      });
     })();
   </script>
 </body>

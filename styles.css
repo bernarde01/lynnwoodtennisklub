@@ -233,7 +233,54 @@ section {
   margin-bottom: 0;
 }
 
-/* Facilities grid */
+/* Facilities: videos first, then photo grid */
+.facilities-subtitle {
+  font-size: 1.35rem;
+  font-weight: 600;
+  text-align: center;
+  margin: 0 0 1.25rem;
+  color: var(--text-dark);
+}
+
+.facilities-subtitle:first-of-type {
+  margin-top: 0.5rem;
+}
+
+.facilities-videos + .facilities-subtitle {
+  margin-top: 2.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.facilities-videos {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  max-width: 1000px;
+  margin: 0 auto 3rem;
+}
+
+.video-showcase {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  background: #111;
+  aspect-ratio: 16 / 9;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.video-showcase:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.video-showcase video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Facilities grid (photos only) */
 .facilities-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -242,23 +289,11 @@ section {
   margin: 0 auto;
 }
 
-/* Last card centered and same size as one grid column (gap is 1.5rem) */
-.facilities-grid .facility-card:last-child {
+/* Last row with a single card: class + width set via JS (see index.html) */
+.facilities-grid .facility-card--orphan {
   grid-column: 1 / -1;
   justify-self: center;
-  width: calc((100% - 3rem) / 3);  /* matches one column when grid has 3 columns */
-}
-
-@media (max-width: 900px) {
-  .facilities-grid .facility-card:last-child {
-    width: calc((100% - 1.5rem) / 2);  /* 2 columns */
-  }
-}
-
-@media (max-width: 600px) {
-  .facilities-grid .facility-card:last-child {
-    width: 100%;  /* 1 column */
-  }
+  max-width: 100%;
 }
 
 .facility-card {
@@ -399,6 +434,15 @@ section {
 
   .section-title {
     font-size: 2rem;
+  }
+
+  .facilities-subtitle {
+    font-size: 1.2rem;
+  }
+
+  .facilities-videos {
+    grid-template-columns: 1fr;
+    margin-bottom: 2.5rem;
   }
 
   .menu-toggle {
