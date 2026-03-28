@@ -24,6 +24,22 @@ No JavaScript frameworks or build tools. Open `index.html` in a browser or host 
 
 3. **About text** – Edit the paragraphs in the About section in `index.html` to match your club.
 
+## Adding music to facility videos
+
+The website cannot add sound to MP4 files by itself; the browser plays whatever is already in each file.
+
+**Recommended:** mix in a track with **ffmpeg** (install via Homebrew: `brew install ffmpeg`). Use only music you are allowed to use (your own recording, club licence, or royalty-free sites such as [Pixabay Music](https://pixabay.com/music/), [YouTube Audio Library](https://studio.youtube.com/), or similar).
+
+From the project root, with a music file (e.g. `music.mp3`):
+
+```bash
+./scripts/mux-music-into-video.sh /path/to/your-music.mp3
+```
+
+That writes `*-with-music.mp4` next to each source video in `Images/`. Then point the `<video>` `src` in `index.html` at those new files (or replace the originals after backing them up).
+
+The script **replaces** the video’s existing audio with the music track and trims to the shorter of video or music (`-shortest`). To **keep** original sound and duck music underneath, you need a more advanced ffmpeg filter (e.g. `amix`); search for “ffmpeg mix two audio tracks” or edit in iMovie / CapCut / DaVinci Resolve.
+
 ## Running locally
 
 Double-click `index.html` or run a simple server, e.g.:
